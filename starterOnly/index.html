@@ -52,9 +52,9 @@
         </button>
       </div>
 
-      <div class="bground">
+      <div class="bground"><!--Modal-->
         <div class="content">
-          <span class="close"></span>
+          <span id="close"></span> <!-- X : à modifer en id pour un élément unique-->
           <div class="modal-body">
             <form
               name="reserve"
@@ -71,7 +71,8 @@
                   id="first"
                   name="first"
                   minlength="2"
-                /><br>
+                  required 
+                /><br><!--required ajouté-->
               </div>
               <div
                 class="formData">
@@ -81,7 +82,8 @@
                   type="text"
                   id="last"
                   name="last"
-                /><br>
+                  required
+                /><br><!--required ajouté-->
               </div>
               <div
                 class="formData">
@@ -91,7 +93,8 @@
                   type="email"
                   id="email"
                   name="email"
-                /><br>
+                  required
+                /><br><!--required ajouté-->
               </div>
               <div
                 class="formData">
@@ -101,12 +104,21 @@
                   type="date"
                   id="birthdate"
                   name="birthdate"
-                /><br>
+                  required
+                /><br><!--required ajouté-->
               </div>
               <div
                 class="formData">
                 <label>À combien de tournois GameOn avez-vous déjà participé ?</label><br>
-                <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
+                <input 
+                  type="number" 
+                  class="text-control" 
+                  id="quantity" 
+                  name="quantity" 
+                  min="0" 
+                  max="99" 
+                  required
+                /><!--required ajouté-->
               </div>
               <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
               <div
@@ -117,7 +129,7 @@
                   id="location1"
                   name="location"
                   value="New York"
-                />
+                /><!--! pas de required ajouté !-->
                 <label class="checkbox-label" for="location1">
                   <span class="checkbox-icon"></span>
                   New York</label
