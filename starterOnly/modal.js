@@ -9,9 +9,9 @@ function editNav() {
 
 // DOM Elements
 const modalbg = document.querySelector(".bground");
-const modalBtn = document.querySelectorAll(".modal-btn");
-const formData = document.querySelectorAll(".formData");
-const closeModalBtn = document.getElementById("close"); // ajouté 
+const modalBtn = document.querySelectorAll(".modal-btn"); // type = tableau
+const formData = document.querySelectorAll(".formData"); // ...All pour sélectionner un ou plusieurs éléments
+const closeModalBtn = document.getElementById("close"); // ajouté // sélectionne un ID ; l'ID est renseigné sans le #
 // console.log(closeModalBtn); // mon réflexe
 
 
@@ -22,6 +22,7 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 // close modal event 
 closeModalBtn.addEventListener("click", closeModal); // ajouté
+
 
 // FUNCTIONS
 

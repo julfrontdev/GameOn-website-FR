@@ -20,7 +20,7 @@ let => permet de déclarer une variable et de la modifier par la suite
 let name = "Julien";
 name = "Antoine";
 
-let identity = { name: "Julien", pays: "France" };
+let identity = { name: "Julien", pays: "France" }; --> object
 identity = { name: "Antoine", pays: "Suisse" };
 
 90% des cas
@@ -32,7 +32,7 @@ name = "Antoine"; ==> impossible
 const number = 10;
 number = 15; ===> impossible
 
-const identity = { name: "Julien", pays: "France" };
+const identity = { name: "Julien", pays: "France" }; --> object
 identity.name = "Antoine"; ==> OK (modification possible au 2e d°, impossible au 1er d°)(ici : objet dans la constante)
 
 const names = ["Julien"];
