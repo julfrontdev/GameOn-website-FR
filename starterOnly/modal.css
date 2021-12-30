@@ -269,8 +269,10 @@ input[data-error]::after {
   transition: 0.3s;
   opacity: 0;
 }
-.checkbox-input {
-  display: none;
+.checkbox-input { /* JS "An invalid form control with name='' is not focusable" */ 
+  /*display: none; remplacé par ces deux propriétés : */ 
+  position: absolute;
+  opacity: 0;
 }
 .checkbox-input:checked + .checkbox-label .checkbox-icon::after,
 .checkbox-input:checked + .checkbox2-label .checkbox-icon::after {
