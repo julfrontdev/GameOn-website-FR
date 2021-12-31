@@ -7,79 +7,90 @@ function editNav() {
   }
 }
 
-// DOM Elements
+// DOM ELEMENTS
+
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn"); // type = tableau
-const formData = document.querySelectorAll(".formData"); // ...All pour sélectionner un ou plusieurs éléments
-const closeModalBtn = document.getElementById("close"); // ajouté // sélectionne un ID ; l'ID est renseigné sans le #
-// console.log(closeModalBtn); // mon réflexe
+const formData = document.querySelectorAll(".formData"); 
+const closeModalBtn = document.getElementById("close"); 
 
 
-// EVENTS
+// #1 LAUNCH AND CLOSE MODAL
 
-// launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-
-// close modal event 
 closeModalBtn.addEventListener("click", closeModal); // ajouté
 
-
-
-// FUNCTIONS
-
-// launch modal form
 function launchModal() {
   modalbg.style.display = "block";
 }
 
-// #1 close modal form 
 function closeModal() { // ajouté
   modalbg.style.display = "none";
 }
 
 
+// #2 FORM DATA 
 
-// #2 Conserver les données du formulaire
 
-// Error messages 
+// #3 ERRROR MESSAGES  
+
 
 /*
-const errorNom = document.getElementById('error_nom')
-const errorMail = document.getElementById('error_mail')
-const errorDateNaissance = document.getElementById('error_date_naissance')
-const errorNombreTournois = document.getElementById('error_nombre_tournois')
+const errorLast = document.getElementById('error_last')
+const errorBirthdate = document.getElementById('error_birthdate')
+const errorQuantity = document.getElementById('error_quantity')
 const errorOption = document.getElementById('error_option')
-const errorTermes = document.getElementById('error_termes')
+const errorTerms = document.getElementById('error_terms')
 */
 
-const errorFirst = document.getElementById('error_first')
-// console.log(errorFirst) OK
-const form = document.getElementById('form')
-// console.log(form); console : form#form
+const form = document.getElementById('form'); 
+
+/**
+ * Check names field and add error if value length is under 2.
+ */
+
+const validateIdentity = (errorId, inputSelector) => {
+  const error = document.getElementById(errorId); // error Ids passent 
+  const entree = document.querySelector(inputSelector).value; // input Selectors passent 
+
+  if (entree.length <= 2) {
+    error.innerText = "Oups, votre saisie fait moins de 2 caractères";
+    error.classList.add('error'); // éviter error.style.color = "red"; 
+  }
+};
 
 form.addEventListener('submit', (e) => {
+  validateIdentity('error_first', '#first');
+  validateIdentity('error_last', '#last');
 
-  const entreeFirst = document.querySelector('#first').value; 
-  //console.log('ça marche') OK
+  e.preventDefault()
+});
 
-  let errorFirstMessage
-  
-  if (entreeFirst.length <= 2) {
-    // console.log('ça fonctionne') OK
-    errorFirstMessage = "Oups, votre prénom fait moins de 2 caractères"; 
-    errorFirst.style.color = "red"; 
+// Error email 
+const errorEmail = document.getElementById('error_email'); 
+form.addEventListener('submit', (e) => {
+
+  const entreeEmail = document.querySelector('#email').value; 
+  const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+  if (entreeEmail.match(mailFormat)) {
+    console.log('email matched');
   } else {
-    errorFirstMessage = "OK"; // à supprimer
-  }
-
-  if (errorFirstMessage) {
-    errorFirst.innerText = errorFirstMessage; 
+    errorEmail.innerText = "Oups, le format de votre email est invalide"; 
+    errorEmail.style.color = "red"; 
+    console.log('email not matched');
   }
 
   e.preventDefault()
-}); 
+});
 
 
-// A faire : autres messages d'erreurs
 
+
+
+
+// Error birthdate
+// Error quantity
+// Error option 
+// Error terms
 

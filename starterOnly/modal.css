@@ -139,6 +139,10 @@ main {
 
 /* Modal form */
 
+.error {
+  color: #fe142f; 
+}
+
 .button {
   background: #fe142f;
   margin-top: 0.5em;
