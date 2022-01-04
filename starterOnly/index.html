@@ -73,9 +73,8 @@
                   type="text"
                   id="first"
                   name="first"
-                 
                   required 
-                /><br><!--  minlength="2" enlevé ; required ajouté-->
+                /><br><!--  minlength="2" enlevé ; required ajouté--><!-- text -->
                 <p id='error_first'></p><!--ajouté-->
               </div>
 
@@ -85,12 +84,12 @@
                 <label>Nom</label><br>
                 <input
                   class="text-control"
-                  type="text"
+                  type="text" 
                   id="last"
                   name="last"
                   minlength="2" 
                   required
-                /><br><!--required et minlenght ajoutés-->
+                /><br><!--required et minlenght ajoutés--><!-- text -->
                 <p id='error_last'></p><!--ajouté-->
               </div>
               <div
@@ -98,11 +97,11 @@
                 <label>E-mail</label><br>
                 <input
                   class="text-control"
-                  type="email"
+                  type="email" 
                   id="email"
                   name="email"
                   required
-                /><br><!--required ajouté-->
+                /><br><!--required ajouté--><!-- email -->
                 <p id='error_email'></p><!--ajouté-->
               </div>
               <div
@@ -110,12 +109,12 @@
                 <label>Date de naissance</label><br>
                 <input
                   class="text-control"
-                  type="date"
+                  type="date" 
                   id="birthdate"
                   name="birthdate"
                   required
-                /><br><!--required ajouté-->
-                <p id='error_date_naissance'></p><!--ajouté-->
+                /><br><!--required ajouté--><!-- date -->
+                <p id='error_birthdate'></p><!--ajouté-->
               </div>
               <div
                 class="formData">
@@ -129,8 +128,8 @@
                   max="99" 
                   required
                 /><!--required ajouté-->
-                <br>
-                <p id='error_option'></p><!--ajouté-->
+                <br><!-- number -->
+                <p id='error_quantity'></p><!--ajouté-->
             
               </div>
               <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
@@ -138,12 +137,12 @@
                 class="formData">
                 <input
                   class="checkbox-input"
-                  type="radio"
+                  type="radio" 
                   id="location1"
                   name="location"
                   value="New York"
                   required 
-                /><!--! 1 seul required ajouté, ça suffit !-->
+                /><!--! 1 seul required ajouté, ça suffit !--><!-- radio -->
                 <label class="checkbox-label" for="location1">
                   <span class="checkbox-icon"></span>
                   New York</label
