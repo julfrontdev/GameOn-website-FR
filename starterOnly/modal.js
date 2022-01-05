@@ -37,16 +37,16 @@ const form = document.getElementById("form"); // elle peut être supprimée
  * Check names field and add error if value length is under 2.
  */
 const validateIdentity = (errorId, inputSelector) => {
-  const errorName = document.getElementById(errorId); //
-  const entreeName = document.querySelector(inputSelector).value; //
+  const errorName = document.getElementById(errorId); 
+  const entreeName = document.querySelector(inputSelector).value; 
 
   if (entreeName.length <= 2) {
     errorName.innerText = "Oups, votre saisie fait moins de 2 caractères";
-    errorName.classList.toggle("error-color"); //
-    console.log("name not matched");
+    errorName.classList.toggle("error-color");
+    console.log("name not matched"); // OK
     return false;
   } else {
-    console.log("name matched");
+    console.log("name matched"); // OK
     return true;
   }
 };
@@ -54,7 +54,7 @@ const validateIdentity = (errorId, inputSelector) => {
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   validateIdentity("error_first", "#first");
-  validateIdentity("error_last", "#last");
+  validateIdentity("error_last", "#last"); // rien dans la console si erreur seulement là
 });
 
 /**
@@ -88,24 +88,23 @@ const validateBirthdate = (errorId, inputSelector) => {
   const birthdateFormatRegex =
     /(?:\d{1,2}[-/\s]\d{1,2}[-/\s]'?\d{2,4})|(?:\d{2,4}[-/\s]\d{1,2}[-/\s]\d{1,2})|(?:(?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sept|Sep|Oct|Nov|Dec)[\s-/,]*?\d{1,2}(?:\s)*(?:rd|th|st)?(?:\s)*[-/,]?(?:\s)*'?\d{2,4})|(?:\d{1,2}(?:\s)*(?:rd|th|st)?(?:\s)*(?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sept|Sep|Oct|Nov|Dec)(?:\s)*?[-/,]?(?:\s)*'?\d{2,4})/;
   const errorBirthdate = document.getElementById(errorId); //
-  const entreeBirthDate = document.querySelector(inputSelector).value;
+  const entreeBirthdate = document.querySelector(inputSelector).value;
 
-  if (birthdateFormatRegex.test(entreeBirthDate)) {
-    console.log("birthdate matched"); // OK
-    // return true;
-  } else if (entreeBirthdate.length === 0) {
-    // pas d'entrée indiquée * à revoir * ne fonctionne pas **
+  if (birthdateFormatRegex.test(entreeBirthdate)) {
+    console.log("birthdate matched") // OK
+  } else if (entreeBirthdate.length === 0) { 
     errorBirthdate.innerText = "Le champ est vide";
     errorBirthdate.classList.add("error-color");
-    console.log("quantity not entered"); //
+    console.log("quantity not entered"); // OK
   } else {
     errorBirthdate.innerText =
-      "Oups, le format de votre date de naissance est invalide"; // message s'affiche toujours, et trop bas
+      "Oups, le format de votre date de naissance est invalide"; 
     errorBirthdate.classList.add("error-color");
-    console.log("birthdate not matched"); //
-    // return false;
-  }
-};
+    console.log("birthdate not matched"); // Ça fonctionne ? 
+  }; 
+}
+
+  
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -120,19 +119,12 @@ const validateQuantity = (errorId, inputSelector) => {
   const errorQuantity = document.getElementById(errorId); //
   const entreeQuantity = document.querySelector(inputSelector).value;
 
-  if (quantityFormatRegex.test(entreeQuantity)) {
+  if (quantityFormatRegex.test(entreeQuantity) && entreeQuantity <= 99) {
     console.log("quantity matched"); // OK
-    // return true;
-  } else if (entreeQuantity.length === "") {
-    // pas d'entrée indiquée * à revoir * ne fonctionne pas **
-    errorQuantity.innerText = "Le champ est vide";
-    errorQuantity.classList.add("error-color");
-    console.log("quantity not entered"); //
   } else {
     errorQuantity.innerText = "Oups, veuillez indiquer un nombre entre 0 et 99";
     errorQuantity.classList.add("error-color");
-    console.log("quantity not matched"); // pas de message d'erreur
-    // return false;
+    console.log("quantity not matched"); // OK
   }
 };
 
@@ -144,10 +136,9 @@ form.addEventListener("submit", (e) => {
 /**
  * Check location of a future tournament and add error if no check
  */
-
 const errorLocation = document.getElementById("error_location");
 
-function validateLocation() {
+const validateLocation = () => {
   if (document.getElementById("location1").checked) {
     console.log("location 1 checked");
     return true;
@@ -167,12 +158,13 @@ function validateLocation() {
     console.log("location 6 checked");
     return true;
   } else {
-    document.getElementById("error_location").innerHTML =
+    document.getElementById("error_location").innerText =
       "Veuillez indiquer une destination pour votre prochain tournoi";
-    return false;
     errorLocation.classList.add("error-color");
+    console.log("no location checked");
+    return false;
   }
-}
+};
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -182,4 +174,22 @@ form.addEventListener("submit", (e) => {
 /**
  * Check terms and add error message if not checked
  */
+const errorTerms = document.getElementById("error_terms");
 
+const validateTerms = () => {
+  if (document.getElementById("checkbox1").checked) {
+    console.log("terms checked");
+    return true;
+  } else {
+    document.getElementById("error_terms").innerText =
+      "Veuillez accepter les CGV";
+    errorTerms.classList.add("error-color");
+    console.log("terms not checked");
+    return false;
+  }
+};
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  validateTerms();
+});

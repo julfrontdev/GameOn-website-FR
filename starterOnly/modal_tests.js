@@ -63,6 +63,16 @@ function checkInputs() {
  */
 
 /**
+ * Check quantity
+ */
+
+  else if (entreeQuantity.length === 0) { // pas d'entrée indiquée * à revoir * ne fonctionne pas **
+    errorQuantity.innerText = "Le champ est vide";
+    errorQuantity.classList.add("error-color");
+    console.log("quantity not entered"); // OK
+  } 
+
+/**
  * Check location of a future tournament and add error if no value
  */
 

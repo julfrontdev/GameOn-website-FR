@@ -73,12 +73,10 @@
                   type="text"
                   id="first"
                   name="first"
-                  required 
-                /><br><!--  minlength="2" enlevé ; required ajouté--><!-- text -->
+                /><br><!--  minlength="2" enlevé ; required ajouté puis supprimé--><!-- text -->
                 <p id='error_first'></p><!--ajouté-->
               </div>
-
-
+              
               <div
                 class="formData">
                 <label>Nom</label><br>
@@ -87,9 +85,7 @@
                   type="text" 
                   id="last"
                   name="last"
-                  minlength="2" 
-                  required
-                /><br><!--required et minlenght ajoutés--><!-- text -->
+                /><br><!--required et minlenght ajoutés (puis required et minlength="2" supprimés)--><!-- text -->
                 <p id='error_last'></p><!--ajouté-->
               </div>
               <div
@@ -112,8 +108,7 @@
                   type="date" 
                   id="birthdate"
                   name="birthdate"
-                  required
-                /><br><!--required ajouté--><!-- date -->
+                /><br><!--required ajouté puis enlevé--><!-- date -->
                 <p id='error_birthdate'></p><!--ajouté-->
               </div>
               <div
@@ -124,10 +119,7 @@
                   class="text-control" 
                   id="quantity" 
                   name="quantity" 
-                  min="0" 
-                  max="99" 
-                  required
-                /><!--required ajouté-->
+                /><!--required ajouté puis supprimé, idem min="0" et max="99" supprimés -->
                 <br><!-- number -->
                 <p id='error_quantity'></p><!--ajouté-->
             
@@ -205,7 +197,6 @@
               <br>
               <p id='error_location'></p><!--ajouté-->
               
-
               <div
                 class="formData">
                 <input
