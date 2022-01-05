@@ -61,3 +61,69 @@ function checkInputs() {
 /**
  * Check names field and add error if value length is under 2.
  */
+
+/**
+ * Check location of a future tournament and add error if no value
+ */
+
+ function validateLocation() { 
+  let checkRadio = document.querySelector(
+      'input[name="location"]:checked');
+    
+  if(checkRadio != null) {
+      document.getElementById("error_location").innerHTML
+          = checkRadio.value
+          + " radio button checked"; // rien
+          console.log("checked"); // rien
+  }
+  else {
+      document.getElementById("error_location").innerHTML
+          = "No one selected"; // rien
+          console.log("not checked"); // rien
+  }
+}
+
+
+// sinon 
+
+const validateLocation = (errorId, change) => {
+
+const errorLocation = document.getElementById(errorId); 
+const entreeLocation = document.querySelector(locations).value;
+
+ const location1 = document.getElementById("location1");
+ const location2 = document.getElementById("location2");
+ const location3 = document.getElementById("location3");
+ const location4 = document.getElementById("location4");
+ const location5 = document.getElementById("location5");
+ const location6 = document.getElementById("location6"); 
+
+ const locations = [
+   location1,
+   location2,
+   location3,
+   location4,
+   location5,
+   location6,
+ ];
+
+ for (i = 0; i < locations.length; i++) {
+   if (locations[i].checked) break; 
+   return true; 
+   console.log(locations[i].value);
+ } else { // problème 
+  errorLocation.innerText = "Oups, veuillez indiquer un lieu";
+  errorLocation.classList.add("error-color");
+  return false; 
+  console.log("Location not matched"); // pas de message d'erreur 
+ }
+}
+
+ form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  validateLocation("error_location", "locations");
+});
+
+/**
+ * Check terms and add error if no check
+ */
