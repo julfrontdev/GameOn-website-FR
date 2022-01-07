@@ -1,5 +1,5 @@
 function editNav() {
-  var x = document.getElementById("myTopnav"); // var ou let ?
+  var x = document.getElementById("myTopnav"); // let ?
   if (x.className === "topnav") {
     x.className += " responsive";
   } else {
@@ -31,7 +31,8 @@ function closeModal() {
 
 // #3 ERRROR MESSAGES
 
-const form = document.getElementById("form"); // elle peut être supprimée
+const form = document.getElementById("form"); //
+const errorClassColor = "error-color"
 
 /**
  * Check names field and add error if value length is under 2.
@@ -42,7 +43,7 @@ const validateIdentity = (errorId, inputSelector) => {
 
   if (entreeName.length <= 2) {
     errorName.innerText = "Oups, votre saisie fait moins de 2 caractères";
-    errorName.classList.toggle("error-color");
+    errorName.classList.toggle(errorClassColor);
     console.log("name not matched"); // OK
     return false;
   } else {
@@ -63,16 +64,14 @@ form.addEventListener("submit", (e) => {
 const validateEmail = (errorId, inputSelector) => {
   const emailFormatRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   const errorEmail = document.getElementById(errorId); //
-  const entreeEmail = document.querySelector(inputSelector).value; //
+  const entreeEmail = document.querySelector(inputSelector).value; 
 
   if (emailFormatRegex.test(entreeEmail)) {
     console.log("email matched"); // OK
-    // return true;
   } else {
     errorEmail.innerText = "Oups, le format de votre email est invalide";
-    errorEmail.classList.add("error-color");
+    errorEmail.classList.add(errorClassColor);
     console.log("email not matched"); // OK
-    // return false;
   }
 };
 
@@ -87,24 +86,22 @@ form.addEventListener("submit", (e) => {
 const validateBirthdate = (errorId, inputSelector) => {
   const birthdateFormatRegex =
     /(?:\d{1,2}[-/\s]\d{1,2}[-/\s]'?\d{2,4})|(?:\d{2,4}[-/\s]\d{1,2}[-/\s]\d{1,2})|(?:(?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sept|Sep|Oct|Nov|Dec)[\s-/,]*?\d{1,2}(?:\s)*(?:rd|th|st)?(?:\s)*[-/,]?(?:\s)*'?\d{2,4})|(?:\d{1,2}(?:\s)*(?:rd|th|st)?(?:\s)*(?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sept|Sep|Oct|Nov|Dec)(?:\s)*?[-/,]?(?:\s)*'?\d{2,4})/;
-  const errorBirthdate = document.getElementById(errorId); //
+  const errorBirthdate = document.getElementById(errorId); 
   const entreeBirthdate = document.querySelector(inputSelector).value;
 
   if (birthdateFormatRegex.test(entreeBirthdate)) {
     console.log("birthdate matched") // OK
   } else if (entreeBirthdate.length === 0) { 
     errorBirthdate.innerText = "Le champ est vide";
-    errorBirthdate.classList.add("error-color");
+    errorLocation.classList.add(errorClassColor);
     console.log("quantity not entered"); // OK
   } else {
     errorBirthdate.innerText =
       "Oups, le format de votre date de naissance est invalide"; 
-    errorBirthdate.classList.add("error-color");
-    console.log("birthdate not matched"); // Ça fonctionne ? 
+    errorBirthdate.classList.add(errorClassColor);
+    console.log("birthdate not matched"); // OK 
   }; 
 }
-
-  
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -116,14 +113,14 @@ form.addEventListener("submit", (e) => {
  */
 const validateQuantity = (errorId, inputSelector) => {
   const quantityFormatRegex = /^[0-9]+$/;
-  const errorQuantity = document.getElementById(errorId); //
+  const errorQuantity = document.getElementById(errorId); 
   const entreeQuantity = document.querySelector(inputSelector).value;
 
   if (quantityFormatRegex.test(entreeQuantity) && entreeQuantity <= 99) {
     console.log("quantity matched"); // OK
   } else {
     errorQuantity.innerText = "Oups, veuillez indiquer un nombre entre 0 et 99";
-    errorQuantity.classList.add("error-color");
+    errorQuantity.classList.add(errorClassColor);
     console.log("quantity not matched"); // OK
   }
 };
@@ -136,10 +133,10 @@ form.addEventListener("submit", (e) => {
 /**
  * Check location of a future tournament and add error if no check
  */
-const errorLocation = document.getElementById("error_location");
-
-const validateLocation = () => {
-  if (document.getElementById("location1").checked) {
+ const errorLocation = document.getElementById("error_location");
+ 
+ const validateLocation = () => {
+    if (document.getElementById("location1").checked) {
     console.log("location 1 checked");
     return true;
   } else if (document.getElementById("location2").checked) {
@@ -155,41 +152,51 @@ const validateLocation = () => {
     console.log("location 5 checked");
     return true;
   } else if (document.getElementById("location6").checked) {
-    console.log("location 6 checked");
+    console.log("location 6 checked"); // OK
     return true;
   } else {
     document.getElementById("error_location").innerText =
       "Veuillez indiquer une destination pour votre prochain tournoi";
-    errorLocation.classList.add("error-color");
-    console.log("no location checked");
+    errorLocation.classList.add(errorClassColor);
+    console.log("no location checked"); // OK
     return false;
   }
 };
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  validateLocation();
+  validateLocation(errorClassColor);
 });
 
 /**
  * Check terms and add error message if not checked
  */
+const checkbox1 = document.getElementById("checkbox1"); 
 const errorTerms = document.getElementById("error_terms");
 
-const validateTerms = () => {
-  if (document.getElementById("checkbox1").checked) {
-    console.log("terms checked");
+const validateTerms = (checkbox, errorTerms, errorClassColor) => {
+  if (checkbox.checked) {
+    console.log("terms checked"); // OK
     return true;
   } else {
-    document.getElementById("error_terms").innerText =
+    errorTerms.innerText =
       "Veuillez accepter les CGV";
-    errorTerms.classList.add("error-color");
-    console.log("terms not checked");
+    errorTerms.classList.add(errorClassColor);
+    console.log("terms not checked"); // OK
     return false;
   }
 };
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  validateTerms();
+  validateTerms(checkbox1, error_terms, errorClassColor);
 });
+
+
+// #4 SUBMIT CONFIRMATION
+
+// const form = document.getElementById("form"); // déjà déclarée
+
+
+// const validateTermsValue  
+
