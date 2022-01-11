@@ -446,7 +446,7 @@ input[data-error]::after {
 .hero-headline {
   font-size: 6rem;
   font-weight: normal;
-  /* white-space: nowrap; suppression */
+  /*white-space: nowrap; suppression ? */
 }
 .hero-text {
   width: 146%;
@@ -469,8 +469,8 @@ input[data-error]::after {
   width: 100%;
   height: 100%;
   display: block;
-  padding: 0;
-  object-fit: cover;
+  padding: 0;  
+  object-fit: cover; /* ajouté */
 }
 .copyrights {
   color: #fe142f;
