@@ -40,21 +40,18 @@
             Vous aimez jouer ? Notre prochain évènement gaming est ouvert
             aux réservations... Places limitées !
           </p>
-          <button class="btn-signup modal-btn">
-            je m'inscris
-          </button>
         </div>
         <div class="hero-img">
           <img src="./bg_img.jpg" alt="img" />
         </div>
         <button class="btn-signup modal-btn">
-          je m'inscris
+          Je m'inscris
         </button>
       </div>
 
       <div class="bground"><!--Modal-->
         <div class="content">
-          <span id="close"></span> <!-- X : à modifer en id pour un élément unique-->
+          <span id="close"></span> <!-- X : modifié en id pour un élément unique-->
           <div class="modal-body">
            
             <form
@@ -74,7 +71,7 @@
                   id="first"
                   name="first"
                 /><br><!--  minlength="2" enlevé ; required ajouté puis supprimé--><!-- text -->
-                <p id='error_first'></p><!--ajouté-->
+                <p class=error id='error_first'></p><!--ajouté-->
               </div>
               
               <div
@@ -86,7 +83,7 @@
                   id="last"
                   name="last"
                 /><br><!--required et minlenght ajoutés (puis required et minlength="2" supprimés)--><!-- text -->
-                <p id='error_last'></p><!--ajouté-->
+                <p class=error id='error_last'></p><!--ajouté-->
               </div>
               <div
                 class="formData">
@@ -98,7 +95,7 @@
                   name="email"
                   required
                 /><br><!--required ajouté--><!-- email -->
-                <p id='error_email'></p><!--ajouté-->
+                <p class=error id='error_email'></p><!--ajouté-->
               </div>
               <div
                 class="formData">
@@ -109,7 +106,7 @@
                   id="birthdate"
                   name="birthdate"
                 /><br><!--required ajouté puis enlevé--><!-- date -->
-                <p id='error_birthdate'></p><!--ajouté-->
+                <p class=error id='error_birthdate'></p><!--ajouté-->
               </div>
               <div
                 class="formData">
@@ -121,7 +118,7 @@
                   name="quantity" 
                 /><!--required ajouté puis supprimé, idem min="0" et max="99" supprimés -->
                 <br><!-- number -->
-                <p id='error_quantity'></p><!--ajouté-->
+                <p class=error id='error_quantity'></p><!--ajouté-->
             
               </div>
               <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
@@ -195,7 +192,7 @@
                 >
               </div>
               <br>
-              <p id='error_location'></p><!--ajouté-->
+              <p class=error id='error_location'></p><!--ajouté-->
               
               <div
                 class="formData">
@@ -203,16 +200,13 @@
                   class="checkbox-input"
                   type="checkbox"
                   id="checkbox1"
-                  checked
-                />
+                /><!--checked supprimé par défaut (légalité)-->
                 <label class="checkbox2-label" for="checkbox1" required>
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
                 <br>
-                <p id='error_terms'></p><!--ajouté-->
-
-                <br>
+                <p class=error id='error_terms'></p><!--ajouté-->
                 <input class="checkbox-input" type="checkbox" id="checkbox2" />
                 <label class="checkbox2-label" for="checkbox2">
                   <span class="checkbox-icon"></span>
@@ -227,6 +221,15 @@
                 value="C'est parti"
               />
             </form>
+            
+            <p class=error id="form-error"></p><!--s'il y a erreur.s-->
+            <div class="thanks" id="thanks">
+              <div class="thanks-message">
+                <p>Merci pour votre enregistrement</p>
+                <button class="button closeThanks">Fermer</button>
+              </div>
+            </div><!--ajouté-->
+
           </div>
         </div>
       </div>

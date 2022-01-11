@@ -139,8 +139,9 @@ main {
 
 /* Modal form */
 
-.error-color {
+.error-message {
   color: #fe142f; 
+  font-size:smaller; 
 }
 
 .button {
@@ -328,7 +329,8 @@ input[data-error]::after {
   transform: rotate(-45deg); /* X */
 }
 .btn-submit,
-.btn-signup {
+.btn-signup, 
+.closeThanks {
   background: #fe142f;
   display: block;
   margin: 0 auto;
@@ -426,7 +428,7 @@ input[data-error]::after {
   color: #fff;
   position: relative;
   text-align: left;
-  min-width: 424px;
+  min-width: 324px; /*424px*/
 }
 .hero-content::after {
   content: "";
@@ -444,7 +446,7 @@ input[data-error]::after {
 .hero-headline {
   font-size: 6rem;
   font-weight: normal;
-  white-space: nowrap;
+  /* white-space: nowrap; suppression */
 }
 .hero-text {
   width: 146%;
@@ -453,8 +455,8 @@ input[data-error]::after {
   padding: 0;
 }
 .btn-signup {
-  outline: none;
-  text-transform: capitalize;
+  outline: none; 
+  /* text-transform: capitalize; suppression */ 
   font-size: 1.3rem;
   padding: 15px 23px;
   margin: 0;
@@ -468,6 +470,7 @@ input[data-error]::after {
   height: 100%;
   display: block;
   padding: 0;
+  object-fit: cover;
 }
 .copyrights {
   color: #fe142f;

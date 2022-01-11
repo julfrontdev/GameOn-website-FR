@@ -74,3 +74,9 @@ const objet = { name: "Julien", pays: "France" };
 
 objet.name ==> Julien
 objet.pays ==> France
+
+# Blocage 
+
+- console.log => essayer d'identifier clairement la ligne ou la directive qui pose problème : si possible, logger la valeur de la variable, pour voir ce qui pose réellement problème
+- onglet sources de chrome, je me met un point d'arrêt sur le début de la fonction, et je passe étape par étape : survoler chaque élément pour voir leur valeur
+- recherche en anglais 
