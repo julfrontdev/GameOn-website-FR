@@ -16,7 +16,7 @@ const modalBtn = document.querySelectorAll(".modal-btn"); // type = tableau
 const formData = document.querySelectorAll(".formData");
 const closeModalBtn = document.getElementById("close");
 const modalThanks = document.getElementById("thanks"); 
-const closeThanks = document.getElementsByClassName("closeThanks"); 
+const closeModalThanksBtn = document.querySelector(".close-thanks-btn"); 
 
 
 
@@ -36,7 +36,10 @@ function closeModal() {
   modalbg.style.display = "none";
 }
 
-
+function closeModalThanks() {
+  modalThanks.style.display = "none"; 
+}
+closeModalThanksBtn.addEventListener("click", closeModalThanks);
 
 
 // #2 FORM DATA
@@ -44,16 +47,16 @@ function closeModal() {
 
 
 
-// #3 ERRROR MESSAGES
+// #3 EVENTS & ERRROR MESSAGES
 
-const form = document.getElementById("form"); //
+const form = document.getElementById("form"); 
 const formError = document.getElementById("form-error"); 
 const errorClassMessage = "error-message" // CSS class 
 
 /**
  * Check names field and add error if value length is under 2.
  */
-const validateIdentity = (errorId, inputSelector) => {
+const isValidIdentity = (errorId, inputSelector) => {
   const errorName = document.getElementById(errorId); 
   const entryName = document.querySelector(inputSelector).value; 
 
@@ -71,24 +74,26 @@ const validateIdentity = (errorId, inputSelector) => {
 /**
  * Check email validity and add error if not valid
  */
-const validateEmail = (errorId, inputSelector) => {
+const isValidEmail = (errorId, inputSelector) => {
   const emailFormatRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   const errorEmail = document.getElementById(errorId); //
   const entryEmail = document.querySelector(inputSelector).value; 
 
   if (emailFormatRegex.test(entryEmail)) {
-    console.log("email matched"); // OK (mais message d'erreur Email non valide)
+    console.log("email matched");
+    return true; // OK (mais message d'erreur Email non valide)
   } else {
     errorEmail.innerText = "Oups, le format de votre email est invalide";
     errorEmail.classList.add(errorClassMessage);
     console.log("email not matched"); // OK
+    return false; 
   }
 };
 
 /**
  * Check birth date validity and add error if not valid
  */
-const validateBirthdate = (errorId, inputSelector) => {
+const isValidBirthdate = (errorId, inputSelector) => {
   const birthdateFormatRegex =
     /(?:\d{1,2}[-/\s]\d{1,2}[-/\s]'?\d{2,4})|(?:\d{2,4}[-/\s]\d{1,2}[-/\s]\d{1,2})|(?:(?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sept|Sep|Oct|Nov|Dec)[\s-/,]*?\d{1,2}(?:\s)*(?:rd|th|st)?(?:\s)*[-/,]?(?:\s)*'?\d{2,4})|(?:\d{1,2}(?:\s)*(?:rd|th|st)?(?:\s)*(?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sept|Sep|Oct|Nov|Dec)(?:\s)*?[-/,]?(?:\s)*'?\d{2,4})/;
   const errorBirthdate = document.getElementById(errorId); 
@@ -114,7 +119,7 @@ const validateBirthdate = (errorId, inputSelector) => {
 /**
  * Check number of tournaments done and add error if no value
  */
-const validateQuantity = (errorId, inputSelector) => {
+const isValidQuantity = (errorId, inputSelector) => {
   const quantityFormatRegex = /^[0-9]+$/;
   const errorQuantity = document.getElementById(errorId); 
   const entryQuantity = document.querySelector(inputSelector).value;
@@ -130,14 +135,14 @@ const validateQuantity = (errorId, inputSelector) => {
   }
 };
 
-// validateQuantity() => true ou false
-// console.log(validateQuantity());
-// const result = validateQuantity() => result soit true soit false
+// isValidQuantity() => true ou false
+// console.log(isValidQuantity());
+// const result = isValidQuantity() => result soit true soit false
 
 /*
-validateQuantity(); 
-const resultQuantity = validateQuantity(); 
-console.log(validateQuantity());
+isValidQuantity(); 
+const resultQuantity = isValidQuantity(); 
+console.log(isValidQuantity());
 */
 
 
@@ -146,16 +151,31 @@ console.log(validateQuantity());
  */
  const errorLocation = document.getElementById("error_location");
  
- const validateLocation = () => {
+ const isValidLocation = () => {
    const allLocations = ["location1", "location2", "location3", "location4", "location5", "location6"];
    let isSomewhereSelected = false; // valeur par défaut
 
-   allLocations.forEach((location) => {
-    if (document.getElementById(location).checked) { // ? location = input name? // 
+   /* allLocations.forEach((location) => {
+    if (document.getElementById(location).checked) {
+      console.log(location)
+       // ? location = input name? // 
       console.log("location checked"); // OK (mais message d'erreur Lieu non valide)
-      isSomewhereSelected = true; // the checked location in the array returns the value true 
+      isSomewhereSelected = true; 
+      return true; // the checked location in the array returns the value true 
     } // pas de else ici, sinon ça retournerait la valeur location 1 ; le if permet de trouver le checked location
-   });
+   }); */
+
+   for (const location of allLocations) {
+    if (document.getElementById(location).checked) {
+      console.log(location)
+       // ? location = input name? // 
+      console.log("location checked"); // OK (mais message d'erreur Lieu non valide)
+      isSomewhereSelected = true; 
+      return true; // the checked location in the array returns the value true 
+    } 
+  }
+
+
   if (isSomewhereSelected === false) { // means if no location checked, the value is false, { error message etc.}
     document.getElementById("error_location").innerText =
       "Veuillez indiquer une destination pour votre prochain tournoi";
@@ -171,7 +191,7 @@ console.log(validateQuantity());
 const checkbox1 = document.getElementById("checkbox1"); 
 const errorTerms = document.getElementById("error_terms");
 
-const validateTerms = (checkbox, errorTerms) => {
+const isValidTerms = (checkbox, errorTerms) => {
   if (checkbox.checked) {
     console.log("terms checked"); // OK
     return true;
@@ -187,46 +207,40 @@ const validateTerms = (checkbox, errorTerms) => {
 // #4 SUBMIT CONFIRMATION // en cours... 
 
 // Ecoute de l'évenement sur le submit et message si erreur
-form.addEventListener("submit", (e) => { // 
+form.addEventListener("submit", isValidForm);
+
+
+let validation; // inactive
+
+function isValidForm (e) {
   e.preventDefault();
-  isValidatedForm(); 
-});
 
-function isValidatedForm () {
-  //   e.preventDefault(); ?
-
-  let validation = true; 
-
-  if (!validateIdentity("error_first", "#first")) {
+  if (!isValidIdentity("error_first", "#first")) {
     console.log("Prénon non valide"); 
     validation = false; 
-  }
-  if (!validateIdentity("error_last", "#last")) {
+  } else if (!isValidIdentity("error_last", "#last")) {
     console.log("Nom non valide"); 
     validation = false; 
-  }
-  if (!validateEmail("error_email", "#email")) {
-    console.log("Email non valide"); // message d'erreur (mais email matched) // 
+  } else if (!isValidEmail("error_email", "#email")) {
+    console.log("Email non valide"); // message d'erreur (mais email matched) //
     validation = false; 
-  }
-  if (!validateBirthdate("error_birthdate", "#birthdate")) {
+  } else if (!isValidBirthdate("error_birthdate", "#birthdate")) {
     console.log("Date de naissance non valide"); 
     validation = false; 
-  }
-  if (!validateQuantity("error_quantity", "#quantity")) {
+  } else if (!isValidQuantity("error_quantity", "#quantity")) {
     console.log("Quantité non valide"); 
     validation = false; 
-  }
-  if (!validateLocation()) {
+  } else if (!isValidLocation()) {
     console.log("Lieu non valide"); // message d'erreur (mais location checked) // 
     validation = false; 
-  }
-  if (!validateTerms(checkbox1, errorTerms)) {
+  } else if (!isValidTerms(checkbox1, errorTerms)) {
     console.log("Terms non valide"); 
     validation = false; 
-  }
+  } else {
+    validation = true
+  } // ajouté 
   
-  if (validation === true) {
+  if (validation === true) { // enlever === true ? 
     formError.innerHTML = ""; 
     form.reset(); // efface le formulaire si OK
     form.style.display = "none"; // ferme la modale si OK
