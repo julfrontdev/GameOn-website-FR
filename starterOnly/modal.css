@@ -141,7 +141,7 @@ main {
 
 .error-message {
   color: #fe142f; 
-  font-size:smaller; 
+  font-size: 0.75em; 
 }
 
 .button {

@@ -34,12 +34,17 @@ function launchModal() {
 
 function closeModal() {
   modalbg.style.display = "none";
+  form.reset(); // efface le formulaire si fermé
 }
 
 function closeModalThanks() {
   modalThanks.style.display = "none"; 
+  form.reset(); // efface le formulaire si fermé
 }
-closeModalThanksBtn.addEventListener("click", closeModalThanks);
+
+closeModalThanksBtn.addEventListener("click", closeModal, closeModalThanks);
+
+
 
 
 // #2 FORM DATA
@@ -60,7 +65,7 @@ const isValidIdentity = (errorId, inputSelector) => {
   const errorName = document.getElementById(errorId); 
   const entryName = document.querySelector(inputSelector).value; 
 
-  if (entryName.length <= 2) {
+  if (entryName.length < 2) {
     errorName.innerText = "Oups, votre saisie fait moins de 2 caractères";
     errorName.classList.add(errorClassMessage);
     console.log("name not matched"); // OK
@@ -81,7 +86,7 @@ const isValidEmail = (errorId, inputSelector) => {
 
   if (emailFormatRegex.test(entryEmail)) {
     console.log("email matched");
-    return true; // OK (mais message d'erreur Email non valide)
+    return true; // OK (avant pb : message d'erreur Email non valide)
   } else {
     errorEmail.innerText = "Oups, le format de votre email est invalide";
     errorEmail.classList.add(errorClassMessage);
@@ -178,7 +183,7 @@ console.log(isValidQuantity());
 
   if (isSomewhereSelected === false) { // means if no location checked, the value is false, { error message etc.}
     document.getElementById("error_location").innerText =
-      "Veuillez indiquer une destination pour votre prochain tournoi";
+      "Oups, veuillez indiquer une destination";
     errorLocation.classList.add(errorClassMessage);
     console.log("no location checked"); // OK
     return false;
@@ -197,7 +202,7 @@ const isValidTerms = (checkbox, errorTerms) => {
     return true;
   } else {
     errorTerms.innerText =
-      "Veuillez accepter les CGV";
+      "Oups, veuillez accepter les CGV";
     errorTerms.classList.add(errorClassMessage);
     console.log("terms not checked"); // OK
     return false;
