@@ -18,37 +18,51 @@ const closeModalBtn = document.getElementById("close");
 const modalThanks = document.getElementById("thanks"); 
 const closeModalThanksBtn = document.querySelector(".close-thanks-btn"); 
 
+const FirstName = document.querySelector("input[name=first]"); // ajoutées pour les bordures vertes et rouges
+const LastName = document.querySelector("input[name=last]"); // ajouté
+const email = document.querySelector("input[name=email]"); // ajouté
+const birthdate = document.querySelector("input[name=birthdate]"); // ajouté
+const quantity = document.querySelector("input[name=quantity]"); // ajouté
+const locationRadio = document.querySelectorAll("input[type=radio]"); // pas utilisée
+const terms = document.querySelector("input[type=checkbox]"); // pas utilisée
 
 
 
-// #1 LAUNCH AND CLOSE MODAL
+// LAUNCH AND CLOSE MODAL
 
+/**
+ * Open modal 
+ */
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-closeModalBtn.addEventListener("click", closeModal);
 
 function launchModal() {
   modalbg.style.display = "block";
   modalThanks.style.display = "none"; // Modale thanks n'apparait pas à l'ouverture 
-  form.style.display = "block";
+  
+  let inputs = Array.from(document.querySelectorAll(".input-validation")); // ajouté // effacer le contour vert des champs
+  inputs.forEach((input) => input.classList.remove("input-validation")); // ajouté 
+  
+  form.style.display = "block"; // apparition du corps de la modale
 }
+
+/** 
+ * Close modal with x 
+ */ 
+closeModalBtn.addEventListener("click", closeModal);
 
 function closeModal() {
   modalbg.style.display = "none";
   form.reset(); // efface le formulaire si fermé
 }
 
+/**
+*Close Thanks modal  
+*/
 function closeModalThanks() {
   modalThanks.style.display = "none"; 
   form.reset(); // efface le formulaire si fermé
 }
-
 closeModalThanksBtn.addEventListener("click", closeModal, closeModalThanks);
-
-
-
-
-// #2 FORM DATA
-
 
 
 
@@ -59,22 +73,59 @@ const formError = document.getElementById("form-error");
 const errorClassMessage = "error-message" // CSS class 
 
 /**
- * Check names field and add error if value length is under 2.
+ * Check first name field and add error if value length is under 2.
  */
-const isValidIdentity = (errorId, inputSelector) => {
-  const errorName = document.getElementById(errorId); 
-  const entryName = document.querySelector(inputSelector).value; 
+const isValidFirstName = (errorId, inputSelector) => {
+  const errorFirstName = document.getElementById(errorId); 
+  const entryFirstName = document.querySelector(inputSelector).value; 
 
-  if (entryName.length < 2) {
-    errorName.innerText = "Oups, votre saisie fait moins de 2 caractères";
-    errorName.classList.add(errorClassMessage);
-    console.log("name not matched"); // OK
+  if (entryFirstName.length < 2) {
+
+    FirstName.classList.add("input-error"); // ajouté 
+    FirstName.classList.remove("input-validation"); // ajouté
+
+    errorFirstName.innerText = "Votre prénom doit comporter au moins 2 caractères";
+    errorFirstName.classList.add(errorClassMessage);
+    console.log("first name not matched"); // OK
     return false;
+
   } else {
-    console.log("name matched"); // OK
+
+    FirstName.classList.remove("input-error"); // ajouté
+    FirstName.classList.add("input-validation"); // ajouté 
+
+    console.log("first name matched"); // OK
     return true;
   }
 };
+
+/**
+ * Check last name field and add error if value length is under 2.
+ */
+ const isValidLastName = (errorId, inputSelector) => {
+  const errorLastName = document.getElementById(errorId); 
+  const entryLastName = document.querySelector(inputSelector).value; 
+
+  if (entryLastName.length < 2) {
+    
+    LastName.classList.add("input-error"); // ajouté 
+    LastName.classList.remove("input-validation"); // ajouté
+
+    errorLastName.innerText = "Votre nom doit comporter au moins 2 caractères";
+    errorLastName.classList.add(errorClassMessage);
+    console.log("last name not matched"); // OK
+    return false;
+
+  } else {
+
+    LastName.classList.remove("input-error"); // ajouté
+    LastName.classList.add("input-validation"); // ajouté 
+
+    console.log("last name matched"); // OK
+    return true;
+  }
+};
+
 
 /**
  * Check email validity and add error if not valid
@@ -85,10 +136,19 @@ const isValidEmail = (errorId, inputSelector) => {
   const entryEmail = document.querySelector(inputSelector).value; 
 
   if (emailFormatRegex.test(entryEmail)) {
+
+    email.classList.remove("input-error"); // ajouté
+    email.classList.add("input-validation"); // ajouté 
+
     console.log("email matched");
     return true; // OK (avant pb : message d'erreur Email non valide)
+
   } else {
-    errorEmail.innerText = "Oups, le format de votre email est invalide";
+
+    email.classList.add("input-error"); // ajouté 
+    email.classList.remove("input-validation"); // ajouté
+
+    errorEmail.innerText = "Le format de votre email doit être valide";
     errorEmail.classList.add(errorClassMessage);
     console.log("email not matched"); // OK
     return false; 
@@ -100,21 +160,36 @@ const isValidEmail = (errorId, inputSelector) => {
  */
 const isValidBirthdate = (errorId, inputSelector) => {
   const birthdateFormatRegex =
-    /(?:\d{1,2}[-/\s]\d{1,2}[-/\s]'?\d{2,4})|(?:\d{2,4}[-/\s]\d{1,2}[-/\s]\d{1,2})|(?:(?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sept|Sep|Oct|Nov|Dec)[\s-/,]*?\d{1,2}(?:\s)*(?:rd|th|st)?(?:\s)*[-/,]?(?:\s)*'?\d{2,4})|(?:\d{1,2}(?:\s)*(?:rd|th|st)?(?:\s)*(?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sept|Sep|Oct|Nov|Dec)(?:\s)*?[-/,]?(?:\s)*'?\d{2,4})/;
+    /^\d{4}\-\d{2}\-\d{2}$/
+    // /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
+    // /(?:\d{1,2}[-/\s]\d{1,2}[-/\s]'?\d{2,4})|(?:\d{2,4}[-/\s]\d{1,2}[-/\s]\d{1,2})|(?:(?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sept|Sep|Oct|Nov|Dec)[\s-/,]*?\d{1,2}(?:\s)*(?:rd|th|st)?(?:\s)*[-/,]?(?:\s)*'?\d{2,4})|(?:\d{1,2}(?:\s)*(?:rd|th|st)?(?:\s)*(?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sept|Sep|Oct|Nov|Dec)(?:\s)*?[-/,]?(?:\s)*'?\d{2,4})/;
   const errorBirthdate = document.getElementById(errorId); 
   const entryBirthdate = document.querySelector(inputSelector).value;
 
   if (birthdateFormatRegex.test(entryBirthdate)) {
+
+    birthdate.classList.remove("input-error"); // ajouté
+    birthdate.classList.add("input-validation"); // ajouté 
+
     console.log("birthdate matched") // OK
     return true; 
-  } else if (entryBirthdate.length === 0) { 
+    
+    } else if (entryBirthdate.length === 0) { 
+
+    birthdate.classList.add("input-error"); // ajouté 
+    birthdate.classList.remove("input-validation"); // ajouté
+
     errorBirthdate.innerText = "Le champ est vide";
     errorBirthdate.classList.add(errorClassMessage);
     console.log("birthdate not entered"); // OK
     return false; 
   } else {
+
+    birthdate.classList.add("input-error"); // ajouté 
+    birthdate.classList.remove("input-validation"); // ajouté
+
     errorBirthdate.innerText =
-      "Oups, le format de votre date de naissance est invalide"; 
+      "Le format de votre date de naissance doit être valide"; 
     errorBirthdate.classList.add(errorClassMessage);
     console.log("birthdate not matched"); // OK 
     return false; 
@@ -130,10 +205,18 @@ const isValidQuantity = (errorId, inputSelector) => {
   const entryQuantity = document.querySelector(inputSelector).value;
 
   if (quantityFormatRegex.test(entryQuantity) && entryQuantity <= 99) {
+
+    quantity.classList.remove("input-error"); // ajouté
+    quantity.classList.add("input-validation"); // ajouté 
+
     console.log("quantity matched"); // OK
     return true;
   } else {
-    errorQuantity.innerText = "Oups, veuillez indiquer un nombre entre 0 et 99";
+
+    quantity.classList.add("input-error"); // ajouté 
+    quantity.classList.remove("input-validation"); // ajouté
+
+    errorQuantity.innerText = "Le nombre doit être compris entre 0 et 99";
     errorQuantity.classList.add(errorClassMessage);
     console.log("quantity not matched"); // OK
     return false;
@@ -220,10 +303,10 @@ let validation; // inactive
 function isValidForm (e) {
   e.preventDefault();
 
-  if (!isValidIdentity("error_first", "#first")) {
+  if (!isValidFirstName("error_first", "#first")) {
     console.log("Prénon non valide"); 
     validation = false; 
-  } else if (!isValidIdentity("error_last", "#last")) {
+  } else if (!isValidLastName("error_last", "#last")) {
     console.log("Nom non valide"); 
     validation = false; 
   } else if (!isValidEmail("error_email", "#email")) {

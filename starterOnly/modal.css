@@ -141,7 +141,7 @@ main {
 
 .error-message {
   color: #fe142f; 
-  font-size: 0.75em; 
+  font-size: 0.6em; 
 }
 
 .button {
@@ -153,6 +153,8 @@ main {
   cursor: pointer;
   font-size: 16px;
 }
+
+
 
 .button:hover {
   background: #3876ac;
@@ -205,6 +207,14 @@ input {
   border: 0.8px solid #ccc;
   outline: none;
 }
+
+.input-error { /* ajouté */
+  border: solid 4px red;
+}
+.input-validation { /* ajouté */
+  border: solid 4px rgb(2, 190, 2);
+}
+
 .text-control {
   margin: 0;
   padding: 8px;
@@ -490,15 +500,20 @@ input[data-error]::after {
 .thanks-message {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  height: 300px;
+  height: 80vh; /* 300px modifié */
 }
 .thanks-message p {
+  display: flex; /* ajouté */
+  flex-direction: column; /* ajouté */
+  justify-content: center; /* ajouté */
   width: 309px;
   font-weight: 400;
   font-size: 36px;
   text-align: center;
   margin: 15% 0 20% 0;
+  height: 70vh; 
 }
 .closeThanks {
   position: absolute;
