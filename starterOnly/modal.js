@@ -155,16 +155,22 @@ const isValidEmail = (errorId, inputSelector) => {
   }
 };
 
+const birthDateField = document.querySelector('#birthdate');
+birthDateField.addEventListener('change', () => {
+  isValidBirthdate("error_birthdate", "#birthdate");
+});
+
 /**
  * Check birth date validity and add error if not valid
  */
 const isValidBirthdate = (errorId, inputSelector) => {
   const birthdateFormatRegex =
-    /^\d{4}\-\d{2}\-\d{2}$/
+    /^\d{4}\-\d{2}\-\d{2}$/ // js réinterprète en anglais
     // /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
     // /(?:\d{1,2}[-/\s]\d{1,2}[-/\s]'?\d{2,4})|(?:\d{2,4}[-/\s]\d{1,2}[-/\s]\d{1,2})|(?:(?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sept|Sep|Oct|Nov|Dec)[\s-/,]*?\d{1,2}(?:\s)*(?:rd|th|st)?(?:\s)*[-/,]?(?:\s)*'?\d{2,4})|(?:\d{1,2}(?:\s)*(?:rd|th|st)?(?:\s)*(?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sept|Sep|Oct|Nov|Dec)(?:\s)*?[-/,]?(?:\s)*'?\d{2,4})/;
   const errorBirthdate = document.getElementById(errorId); 
   const entryBirthdate = document.querySelector(inputSelector).value;
+  console.log(entryBirthdate);
 
   if (birthdateFormatRegex.test(entryBirthdate)) {
 
@@ -323,7 +329,7 @@ function isValidForm (e) {
     validation = false; 
   } else if (!isValidTerms(checkbox1, errorTerms)) {
     console.log("Terms non valide"); 
-    validation = false; 
+    validation = false;
   } else {
     validation = true
   } // ajouté 
