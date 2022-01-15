@@ -45,10 +45,10 @@ img {
   display: block;
   color: #000000;
   text-align: center;
-  padding: 12px 12px;
+  padding: 12px 6px; /* 12px 12px */
   margin: 5px;
   text-decoration: none;
-  font-size: 14px; /* 20px */
+  font-size: 17px; /* 20px */
   font-family: Roboto, sans-serif;
 }
 
@@ -69,46 +69,7 @@ img {
   display: none;
 }
 
-@media screen and (max-width: 870px) { /* 768px */
- 
-  .iconfa:hover {
-    color:white; 
-  }
-  .topnav a {display: none;}
-  .topnav a.icon {
-    float: right;
-    display: block;
-    font-size: 25px; /* ajouté */
-    color: #ff0000; /* ajouté */
-  }
- 
 
-}
-
-@media screen and (max-width: 768px) {
-  .topnav.responsive {position: relative;}
-  .topnav.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-}
-
-
-
- @media screen and (max-width: 540px) {
-  .topnav a {display: none;}
-  .topnav a.icon {
-    float: right;
-    display: block;
-    margin-top: -15px;
-  }
-} 
 
 main {
   font-size: 130%;
@@ -447,7 +408,7 @@ input[data-error]::after {
   color: #fff;
   position: relative;
   text-align: left;
-  min-width: 424px; /*424px*/
+  min-width: 300px; /*424px*/
 }
 .hero-content::after {
   content: "";
@@ -536,21 +497,64 @@ footer {
   margin: 0 20px;
 }
 
+/*************************************************/
+
 @media screen and (max-width: 1000px) {
 
-  .hero-headline {
-    width: 50%; /* 50% */
-    /*white-space: nowrap; suppression ? */
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
   }
   .topnav a {
     flex-direction: column; /* ajouté */
-    font-size: 15px; /* ajouté, fonctionne ? */ 
+    font-size: 12.5px; /* ajouté */ 
   }
-
-  /* .header-logo img {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .main-navbar { /* ajouté */
+    width: 120px;
+  }
+  .hero-headline {
+    width: 50%; 
+  }
+}
+ 
+@media screen and (max-width: 1000px) { /* 768px */
+ 
+  .header-logo img {
+    margin-top: 15px;
     width: 200px;
-    
-  } */
+    padding-left: 10px;
+  }
+  .iconfa:hover {
+    color:white; 
+  }
+  .topnav a {
+    display: none;
+  }
+  .topnav a.icon {
+    float: right;
+    display: block;
+    font-size: 25px; /* ajouté */
+    color: #ff0000; /* ajouté */
+  }
+  .topnav { /* ajouté */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;    
+    justify-content: space-between;
+  }
+  .main-navbar { /* ajouté */
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 }
 
 @media screen and (max-width: 800px) {
@@ -573,16 +577,12 @@ footer {
   .hero-content .btn-signup {
     display: none;
   }
-  .header-logo img {
-    width: 200px;
-    padding-left: 10px;
-  }
   .hero-headline {
     width: 100%; 
     font-size: 4.5rem;
     white-space: normal;
     font-size: 2.5em; /* ajouté */
-  }
+  } 
   .hero-text {
     width: unset;
     font-size: 1.5rem;
@@ -600,39 +600,49 @@ footer {
     margin-top: 50px;
     text-align: center;
   }
+}
 
 @media screen and (max-width: 768px) {
+
   .topnav a {
-    font-size: 25px;
+    font-size: 12.5px;
     color: #ff0000;
   }
-  .topnav { /* ajouté */
+  .header-logo img{
     display: flex;
-    align-items: center;    
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
   }
-  .main-navbar {
-    display: flex;
-    align-items: center;
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .main-navbar { /* ajouté */
+    width: 120px;
   }
 }
 
 @media screen and (max-width: 550px) {
   .hero-headline {
     font-size: 3rem;
-  }
-  .topnav {
-    margin-top: 15px;
-  }
-  .iconfa {
-    margin-top: 20px;
-  }
+  }    
   .thanks-message {
     height: 500px; 
   }
-
+  
 }
 
+@media screen and (max-width: 540px) {
+  .topnav a {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+} 
+
+/*************************************************/
   
 @keyframes modalopen {
   from {
@@ -643,4 +653,3 @@ footer {
     opacity: 1;
   }
 }
-
