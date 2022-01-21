@@ -58,6 +58,7 @@ closeModalBtn.addEventListener("click", closeModal);
 function closeModal() {
   modalbg.style.display = "none";
   form.reset(); // efface le formulaire à la fermeture
+  errorFirstName.innerText = ''; 
 }
 
 /**

@@ -52,7 +52,7 @@ img {
   font-family: Roboto, sans-serif;
 }
 
-.topnav a:hover {
+.menu-element:hover { /* modifié de topnav a:hover */
   background-color: #ff0000;
   color: #ffffff;
   border-radius: 15px;
@@ -518,6 +518,7 @@ footer {
   }
   .main-navbar { /* ajouté */
     width: 120px;
+    padding-right: 35px;
   }
   .hero-headline {
     width: 50%; 
@@ -528,29 +529,38 @@ footer {
  
   .header-logo img {
     margin-top: 15px;
-    width: 200px;
     padding-left: 10px;
+    width: 160px;
   }
-  .iconfa:hover {
-    color:white; 
-  }
+  
+  /*.iconfa:hover { color:white;}*/
+  
   .topnav a {
     display: none;
   }
   .topnav a.icon {
     float: right;
     display: block;
-    font-size: 25px; /* ajouté */
+    font-size: 20px; /* ajouté */
+    padding-top: 15px; /* ajouté */
     color: #ff0000; /* ajouté */
   }
+
+  .menu-element:hover { /* ajouté puis modifié de topnav a */
+    background-color: #ff0000; /* #ff0000 */
+    color: #ffffff; /* #ffffff */
+    border-radius: 15px;
+  }
+
   .topnav { /* ajouté */
     display: flex;
     flex-direction: row;
     align-items: flex-start;    
     justify-content: space-between;
+    padding-right: 5px;
   }
   .main-navbar { /* ajouté */
-    width: 120px;
+    width: 130px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -620,7 +630,7 @@ footer {
     top: 0;
   }
   .main-navbar { /* ajouté */
-    width: 120px;
+    width: 125px;
   }
 }
 
