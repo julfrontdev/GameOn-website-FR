@@ -8,6 +8,7 @@ function editNav() {
 }
 
 
+
 // DOM ELEMENTS
 
 
@@ -20,15 +21,21 @@ const modalThanks = document.getElementById("thanks");
 const closeModalThanksBtn = document.querySelector(".close-thanks-btn"); 
 
 /**
- * Inputs (red and green borders)
+ * Inputs 
  */ 
-const FirstName = document.querySelector("input[name=first]");
-const LastName = document.querySelector("input[name=last]"); 
+const firstName = document.querySelector("input[name=first]");
+const lastName = document.querySelector("input[name=last]"); 
 const email = document.querySelector("input[name=email]"); 
 const birthdate = document.querySelector("input[name=birthdate]");
 const quantity = document.querySelector("input[name=quantity]"); 
 const locationRadio = document.querySelectorAll("input[type=radio]"); //
 const terms = document.querySelector("input[type=checkbox]"); // 
+
+const errorFirstName = document.getElementById("error_first"); // ajouté
+const errorLastName = document.getElementById("error_last"); // ajouté
+const errorEmail = document.getElementById("error_email"); // ajouté
+const errorBirthdate = document.getElementById("error_birthdate"); // ajouté
+const errorQuantity = document.getElementById("error_quantity"); // ajouté
 
 
 
@@ -51,22 +58,34 @@ function launchModal() {
 }
 
 /** 
- * Close modal with x 
+ * Close modal with X 
  */ 
-closeModalBtn.addEventListener("click", closeModal);
+ closeModalBtn.addEventListener("click", closeModal);
 
-function closeModal() {
-  modalbg.style.display = "none";
-  form.reset(); // efface le formulaire à la fermeture
-  errorFirstName.innerText = ''; 
-}
-
-/**
+ function closeModal() {
+   modalbg.style.display = "none";
+   errorFirstName.innerHTML = ""; // efface les messages d'erreur à la fermeture
+   errorLastName.innerHTML = ""; 
+   errorEmail.innerHTML = ""; 
+   errorBirthdate.innerHTML = ""; 
+   errorQuantity.innerHTML = ""; 
+   errorLocation.innerHTML = ""; 
+   errorTerms.innerHTML = ""; 
+   formError.innerHTML = ""; 
+   firstName.classList.remove("input-validation", "input-error"); // supprime les bordures
+   lastName.classList.remove("input-validation", "input-error"); 
+   email.classList.remove("input-validation", "input-error"); 
+   birthdate.classList.remove("input-validation", "input-error"); 
+   quantity.classList.remove("input-validation", "input-error"); 
+   form.reset(); // efface le formulaire 
+ }
+ 
+ /**
 *Close Thanks modal  
 */
 function closeModalThanks() {
   modalThanks.style.display = "none"; 
-  form.reset(); // efface le formulaire à la fermeture
+  form.reset(); // efface le formulaire si fermé
 }
 closeModalThanksBtn.addEventListener("click", closeModal, closeModalThanks);
 
@@ -87,15 +106,15 @@ const isValidFirstName = (errorId, inputSelector) => { // #error_first et #first
   const entryFirstName = document.querySelector(inputSelector).value; 
 
   if (entryFirstName.length < 2) {
-    FirstName.classList.add("input-error"); // ajoute la bordure rouge 
-    FirstName.classList.remove("input-validation"); // supprime la bordure verte
+    firstName.classList.add("input-error"); // ajoute la bordure rouge 
+    firstName.classList.remove("input-validation"); // supprime la bordure verte
     errorFirstName.innerText = "Votre prénom doit comporter au moins 2 caractères"; // message d'erreur
     errorFirstName.classList.add(errorClassMessage); // // message d'erreur, forme
     console.log("first name not matched"); // test 
     return false;
   } else {
-    FirstName.classList.remove("input-error"); // supprime la bordure rouge
-    FirstName.classList.add("input-validation"); // ajoute la bordure verte
+    firstName.classList.remove("input-error"); // supprime la bordure rouge
+    firstName.classList.add("input-validation"); // ajoute la bordure verte
     console.log("first name matched"); // test
     return true; 
   }
@@ -109,15 +128,15 @@ const isValidFirstName = (errorId, inputSelector) => { // #error_first et #first
   const entryLastName = document.querySelector(inputSelector).value; 
 
   if (entryLastName.length < 2) {
-    LastName.classList.add("input-error"); 
-    LastName.classList.remove("input-validation"); 
+    lastName.classList.add("input-error"); 
+    lastName.classList.remove("input-validation"); 
     errorLastName.innerText = "Votre nom doit comporter au moins 2 caractères";
     errorLastName.classList.add(errorClassMessage);
     console.log("last name not matched"); // test
     return false;
   } else {
-    LastName.classList.remove("input-error"); 
-    LastName.classList.add("input-validation"); 
+    lastName.classList.remove("input-error"); 
+    lastName.classList.add("input-validation"); 
     console.log("last name matched"); // test
     return true;
   }
@@ -308,4 +327,3 @@ function isValidForm (e) {
 function openThanksModal() {
     modalThanks.style.display = "block"; 
 }
-
