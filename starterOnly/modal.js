@@ -110,12 +110,11 @@ const isValidFirstName = (errorId, inputSelector) => { // #error_first et #first
     firstName.classList.remove("input-validation"); // supprime la bordure verte
     errorFirstName.innerText = "Votre prénom doit comporter au moins 2 caractères"; // message d'erreur
     errorFirstName.classList.add(errorClassMessage); // // message d'erreur, forme
-    console.log("first name not matched"); // test 
     return false;
   } else {
+    errorFirstName.innerHTML = ""; // efface les messages d'erreur à la fermeture
     firstName.classList.remove("input-error"); // supprime la bordure rouge
     firstName.classList.add("input-validation"); // ajoute la bordure verte
-    console.log("first name matched"); // test
     return true; 
   }
 };
@@ -132,12 +131,11 @@ const isValidFirstName = (errorId, inputSelector) => { // #error_first et #first
     lastName.classList.remove("input-validation"); 
     errorLastName.innerText = "Votre nom doit comporter au moins 2 caractères";
     errorLastName.classList.add(errorClassMessage);
-    console.log("last name not matched"); // test
     return false;
   } else {
+    errorLastName.innerHTML = ""; 
     lastName.classList.remove("input-error"); 
     lastName.classList.add("input-validation"); 
-    console.log("last name matched"); // test
     return true;
   }
 };
@@ -151,16 +149,15 @@ const isValidEmail = (errorId, inputSelector) => { // #error_email et #email
   const entryEmail = document.querySelector(inputSelector).value; 
 
   if (emailFormatRegex.test(entryEmail)) {
+    errorEmail.innerHTML = ""; 
     email.classList.remove("input-error"); 
     email.classList.add("input-validation"); 
-    console.log("email matched"); // test
     return true; 
   } else {
     email.classList.add("input-error");
     email.classList.remove("input-validation"); 
     errorEmail.innerText = "Le format de votre email doit être valide";
     errorEmail.classList.add(errorClassMessage);
-    console.log("email not matched"); // test
     return false; 
   }
 };
@@ -178,19 +175,17 @@ const isValidBirthdate = (errorId, inputSelector) => { // #error_birthdate et #b
     /^\d{4}\-\d{2}\-\d{2}$/ 
   const errorBirthdate = document.getElementById(errorId); 
   const entryBirthdate = document.querySelector(inputSelector).value;
-  console.log(entryBirthdate);
 
   if (birthdateFormatRegex.test(entryBirthdate)) {
+    errorBirthdate.innerHTML = ""; 
     birthdate.classList.remove("input-error"); 
     birthdate.classList.add("input-validation");
-    console.log("birthdate matched") // test
     return true; 
     } else if (entryBirthdate.length === 0) { 
     birthdate.classList.add("input-error"); 
     birthdate.classList.remove("input-validation"); 
     errorBirthdate.innerText = "Le champ est vide";
     errorBirthdate.classList.add(errorClassMessage);
-    console.log("birthdate not entered"); // test
     return false; 
   } else {
     birthdate.classList.add("input-error"); 
@@ -198,7 +193,6 @@ const isValidBirthdate = (errorId, inputSelector) => { // #error_birthdate et #b
     errorBirthdate.innerText =
       "Le format de votre date de naissance doit être valide"; 
     errorBirthdate.classList.add(errorClassMessage);
-    console.log("birthdate not matched"); // test
     return false; 
   }; 
 }
@@ -212,16 +206,15 @@ const isValidQuantity = (errorId, inputSelector) => { // #error_quantity et #qua
   const entryQuantity = document.querySelector(inputSelector).value;
 
   if (quantityFormatRegex.test(entryQuantity) && entryQuantity <= 99) {
+    errorQuantity.innerHTML = ""; 
     quantity.classList.remove("input-error"); 
     quantity.classList.add("input-validation"); 
-    console.log("quantity matched"); // test
     return true;
   } else {
     quantity.classList.add("input-error"); 
     quantity.classList.remove("input-validation"); 
     errorQuantity.innerText = "Le nombre doit être compris entre 0 et 99";
     errorQuantity.classList.add(errorClassMessage);
-    console.log("quantity not matched"); // test
     return false;
   }
 };
@@ -236,8 +229,7 @@ const isValidQuantity = (errorId, inputSelector) => { // #error_quantity et #qua
    let isSomewhereSelected = false; 
    for (const location of allLocations) {
     if (document.getElementById(location).checked) {
-      console.log(location) // test input location
-      console.log("location checked"); // test
+      errorLocation.innerHTML = ""; 
       isSomewhereSelected = true; 
       return true;
     } 
@@ -246,7 +238,6 @@ const isValidQuantity = (errorId, inputSelector) => { // #error_quantity et #qua
     document.getElementById("error_location").innerText =
       "Oups, veuillez indiquer une destination";
     errorLocation.classList.add(errorClassMessage);
-    console.log("no location checked"); // test
     return false;
   }
 };
@@ -259,13 +250,12 @@ const errorTerms = document.getElementById("error_terms");
 
 const isValidTerms = (checkbox, errorTerms) => { // #checkbox1 et errorTerms
   if (checkbox.checked) {
-    console.log("terms checked"); // test
+    errorTerms.innerHTML = ""; 
     return true;
   } else {
     errorTerms.innerText =
       "Oups, veuillez accepter les conditions d'utilisation";
     errorTerms.classList.add(errorClassMessage);
-    console.log("terms not checked"); // test
     return false;
   }
 };
@@ -286,25 +276,18 @@ function isValidForm (e) {
   e.preventDefault();
 
   if (!isValidFirstName("error_first", "#first")) {
-    console.log("Prénon non valide"); // test
     validation = false; 
   } else if (!isValidLastName("error_last", "#last")) {
-    console.log("Nom non valide"); // test
     validation = false; 
   } else if (!isValidEmail("error_email", "#email")) {
-    console.log("Email non valide"); // test
     validation = false; 
   } else if (!isValidBirthdate("error_birthdate", "#birthdate")) {
-    console.log("Date de naissance non valide"); // test
     validation = false; 
   } else if (!isValidQuantity("error_quantity", "#quantity")) {
-    console.log("Quantité non valide"); // test
     validation = false; 
   } else if (!isValidLocation()) {
-    console.log("Lieu non valide"); // test
     validation = false; 
   } else if (!isValidTerms(checkbox1, errorTerms)) {
-    console.log("Terms non valide"); // test
     validation = false;
   } else {
     validation = true
