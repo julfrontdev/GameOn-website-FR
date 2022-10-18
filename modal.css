@@ -192,6 +192,7 @@ input {
   border-radius: 8px;
   font-size: 20px;
   height: 48px;
+  cursor: pointer;
 }
 .formData[data-error]::after {
   content: attr(data-error);
