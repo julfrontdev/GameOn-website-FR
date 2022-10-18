@@ -1,5 +1,9 @@
 # Projet GameOn
 
+## Mots clés
+
+HTML, CSS, Responsive, JavaScript, Git, GitHub, Formulaire, Modale
+
 ## Description
 
 GameOn est un projet de création d'un site de réservation de salles de jeux en ligne.
