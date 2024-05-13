@@ -24,7 +24,7 @@ Julien Verley
 
 ### Visit on GitHub pages
 
-https://julfrontdev.github.io/julien_verley_4_30092021/
+https://julienverley.github.io/gameOn/
 
 ### Install on your computer
 
